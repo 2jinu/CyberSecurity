@@ -27,15 +27,13 @@ php는 다양한 [wrappers](https://www.php.net/manual/en/wrappers.php)를 지�
 
 # **환경 구성**
 
-실행 환경
-
 | Type          | Version                   |
 | :---          | :---                      |
 | OS            | Ubuntu 20.04.3 LTS        |
 | Architecture  | x86-64                    |
 | IP            | 192.168.0.58              |
 | apache2       | 2.4.41-4ubuntu3.10        |
-| php           | 7.4                       |
+| php           | 7.4.3                     |
 | php-zip       | 2:7.4+75                  |
 
 apache와 php를 설치하자.

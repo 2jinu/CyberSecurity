@@ -110,7 +110,7 @@ SQLi(SQL Injection)에 취약한 페이지를 생성하자.
 ?>
 ```
 
-# **ExtractValue**
+# **ExtractValue와 UpdateXML**
 
 ExtractValue와 UpdateXML함수의 인자 중 두번째 인자의 형식오류로 다양한 정보를 확인할 수 있다.
 

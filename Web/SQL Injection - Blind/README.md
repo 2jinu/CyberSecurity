@@ -1,4 +1,4 @@
-# Union based SQL Injection
+# Blind SQL Injection
 
 정보를 획득하기 위해 정상적인 쿼리에 추가적인 쿼리를 주입하여 정보를 획득한다.
 
@@ -235,3 +235,9 @@ UNION을 이용하여 테이블의 데이터를 출력하도록 유도해보자.
 결과는 다음과 같다.
 
 	Welcome helloworld
+
+https://velog.io/@yu-jin-song/DB-SQL-%EC%9D%B8%EC%A0%9D%EC%85%98SQL-Injection
+https://m.blog.naver.com/lstarrlodyl/221837243294
+https://choco4study.tistory.com/10
+https://www.lanian.co.kr/entry/Error-Based-SQL-Injection
+https://perspectiverisk.com/mysql-sql-injection-practical-cheat-sheet/

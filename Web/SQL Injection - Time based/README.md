@@ -668,8 +668,3 @@ for i in range(RESULT_LENGTH):
 
 	helloworld
     test
-
-https://velog.io/@yu-jin-song/DB-SQL-%EC%9D%B8%EC%A0%9D%EC%85%98SQL-Injection
-
-prepare($sql);
-magic_quotes=On

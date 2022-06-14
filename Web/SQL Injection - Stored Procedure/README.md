@@ -6,7 +6,7 @@ xp_cmdshell이라는 [Stored Procedure](#https://ko.wikipedia.org/wiki/%EC%A0%80
 
 **1. [환경 구성](#환경-구성)**
 
-**2. [Stored Procedure](#Time-based)**
+**2. [Stored Procedure](#Stored-Procedure)**
 
  - [xp_cmdshell](#xp_cmdshell)
 

@@ -31,7 +31,6 @@ PHP에서 "=="를 사용함으로써 의도하지 않게 프로그램이 진행�
 
 # **환경 구성**
 
-
 | Type          | Version                   |
 | :---          | :---                      |
 | OS            | Ubuntu 20.04.3 LTS        |
@@ -79,7 +78,7 @@ MariaDB [(none)]> flush privileges;
 extension=mysqli.so
 ```
 
-"=="를 사용하여 인증에 취약한 페이지를 생성하자.
+"=="를 사용한 인증에 취약한 페이지를 생성하자.
 
 ```php
 <?php

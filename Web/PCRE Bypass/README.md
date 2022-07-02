@@ -1,6 +1,6 @@
 # PCRE Bypass
 
-[PCRE](#https://ko.wikipedia.org/wiki/%ED%8E%84_%ED%98%B8%ED%99%98_%EC%A0%95%EA%B7%9C_%ED%91%9C%ED%98%84%EC%8B%9D)(Perl Compatible Regular Expressions)의 검사 수 제한을 이용하여 우회
+[PCRE](#https://ko.wikipedia.org/wiki/%ED%8E%84_%ED%98%B8%ED%99%98_%EC%A0%95%EA%B7%9C_%ED%91%9C%ED%98%84%EC%8B%9D)(Perl Compatible Regular Expressions)의 검사 수 제한(catastrophic backtracking)을 이용하여 우회
 
 # **INDEX**
 

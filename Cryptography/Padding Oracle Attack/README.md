@@ -74,7 +74,7 @@ if __name__=='__main__':
 
 # **공격 방법**
 
-블록 암호화의 [CBC 모드](#https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC))는 다음과 같이 동작한다.
+블록 암호화의 [CBC 모드](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC))는 다음과 같이 동작한다.
 
 | Type      | Algorithm |
 | :---:     | :---:     |

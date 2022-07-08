@@ -1,6 +1,6 @@
 # Stored Procedure SQL Injection
 
-xp_cmdshell이라는 [Stored Procedure](#https://ko.wikipedia.org/wiki/%EC%A0%80%EC%9E%A5_%ED%94%84%EB%A1%9C%EC%8B%9C%EC%A0%80)를 호출하여 원격 코드 실행을 할 수 있다.
+xp_cmdshell이라는 [Stored Procedure](https://ko.wikipedia.org/wiki/%EC%A0%80%EC%9E%A5_%ED%94%84%EB%A1%9C%EC%8B%9C%EC%A0%80)를 호출하여 원격 코드 실행을 할 수 있다.
 
 # **INDEX**
 
@@ -21,7 +21,7 @@ xp_cmdshell이라는 [Stored Procedure](#https://ko.wikipedia.org/wiki/%EC%A0%80
 | MSSQL         | 2019 Express              |
 | SSMS          | 18.11.1                   |
 
-[MSSQL Server](#https://www.microsoft.com/ko-kr/sql-server/sql-server-downloads)를 다운받은 후 설치하자.
+[MSSQL Server](https://www.microsoft.com/ko-kr/sql-server/sql-server-downloads)를 다운받은 후 설치하자.
 
 설치 완료 후 SSMS도 설치하자.
 

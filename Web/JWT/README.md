@@ -1,6 +1,6 @@
 # JWT (Json Web Token)
 
-[JWT](#https://ko.wikipedia.org/wiki/JSON_%EC%9B%B9_%ED%86%A0%ED%81%B0)는 인증 및 식별하기 위한 토큰 기반 인증으로 인터넷 표준이다.
+[JWT](https://ko.wikipedia.org/wiki/JSON_%EC%9B%B9_%ED%86%A0%ED%81%B0)는 인증 및 식별하기 위한 토큰 기반 인증으로 인터넷 표준이다.
 
 # **INDEX**
 
@@ -62,13 +62,13 @@ flask서버로 접속하면 jwt 값을 확인할 수 있다.
 
     access_token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzAxNjQ2OCwianRpIjoiNTM0YzYzM2MtMWI1ZC00MDdlLThhYzQtZDk5YjUyYTIwNDkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InVzZXIiLCJuYmYiOjE2NTcwMTY0NjgsImV4cCI6MTY1NzAxNzM2OH0.EkkKCuMfwvZZItOCZ4jUcJOaQTzbSVtXpXmft9aXYcE
 
-[jwt.io](#https://jwt.io/)에서 jwt를 디코딩하면 우측에 sub라는 키의 값은 user라고 나온다.
+[jwt.io](https://jwt.io/)에서 jwt를 디코딩하면 우측에 sub라는 키의 값은 user라고 나온다.
 
 ![](images/2022-07-05-21-33-24.png)
 
 현재 secret key를 알 수 없으므로 Invalid Signature가 나온다.
 
-golang을 설치하고 [jwt cracker](#https://github.com/x1sec/gojwtcrack)를 컴파일하자.
+golang을 설치하고 [jwt cracker](https://github.com/x1sec/gojwtcrack)를 컴파일하자.
 
 ```sh
 user@user:~$ sudo apt -y install golang-go
@@ -89,7 +89,7 @@ user@user:~$ go/bin/gojwtcrack -d rockyou.txt -t token.txt
 1234567890      eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzAxNjQ2OCwianRpIjoiNTM0YzYzM2MtMWI1ZC00MDdlLThhYzQtZDk5YjUyYTIwNDkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InVzZXIiLCJuYmYiOjE2NTcwMTY0NjgsImV4cCI6MTY1NzAxNzM2OH0.EkkKCuMfwvZZItOCZ4jUcJOaQTzbSVtXpXmft9aXYcE
 ```
 
-이후, [jwt.io](#https://jwt.io/)를 이용하여 sub의 값을 admin으로 바꾸고 secret key를 크랙의 결과 값을 넣어서 jwt를 만들자.
+이후, [jwt.io](https://jwt.io/)를 이용하여 sub의 값을 admin으로 바꾸고 secret key를 크랙의 결과 값을 넣어서 jwt를 만들자.
 
 ![](images/2022-07-05-21-41-38.png)
 

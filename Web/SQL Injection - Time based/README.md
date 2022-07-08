@@ -1,6 +1,6 @@
 # Time based SQL Injection
 
-[Error based SQL Injection](#https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Error%20based)처럼 에러가 출력되지 않는 상황에서 참 혹은 거짓의 결과를 판별할 수 있을 경우 정보를 획득하기 위해 사용한다.
+[Error based SQL Injection](https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Error%20based)처럼 에러가 출력되지 않는 상황에서 참 혹은 거짓의 결과를 판별할 수 있을 경우 정보를 획득하기 위해 사용한다.
 
 # **INDEX**
 
@@ -102,9 +102,9 @@ SQLi(SQL Injection)에 취약한 페이지를 생성하자.
 
 # **Time based**
 
-AND나 OR같이 [논리적 에러](#https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Error%20based#%EB%85%BC%EB%A6%AC%EC%A0%81-%EC%97%90%EB%9F%AC)를 이용하여 정보를 획득할 수 있다.
+AND나 OR같이 [논리적 에러](https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Error%20based#%EB%85%BC%EB%A6%AC%EC%A0%81-%EC%97%90%EB%9F%AC)를 이용하여 정보를 획득할 수 있다.
 
-쿼리를 통한 참의 결과와 거짓의 결과를 구분할 수 있어야 한다. 다만, [Boolean based SQL Injection](#https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Boolean%20based)처럼 로그인 계정을 모른다는 가정하에 시작하자.
+쿼리를 통한 참의 결과와 거짓의 결과를 구분할 수 있어야 한다. 다만, [Boolean based SQL Injection](https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Boolean%20based)처럼 로그인 계정을 모른다는 가정하에 시작하자.
 
 표면(HTML)상으로 참과 거짓의 결과를 알 수 없기 때문에 SLEEP함수를 사용한다.
 

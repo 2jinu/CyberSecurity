@@ -1,6 +1,6 @@
 # Boolean based SQL Injection
 
-[Error based SQL Injection](#https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Error%20based)처럼 에러가 출력되지 않는 상황에서 참 혹은 거짓의 결과를 판별할 수 있을 경우 정보를 획득하기 위해 사용한다.
+[Error based SQL Injection](https://github.com/2jinu/CyberSecurity/tree/main/Web/SQL%20Injection%20-%20Error%20based)처럼 에러가 출력되지 않는 상황에서 참 혹은 거짓의 결과를 판별할 수 있을 경우 정보를 획득하기 위해 사용한다.
 
 # **INDEX**
 

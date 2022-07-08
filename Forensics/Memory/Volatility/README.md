@@ -1,6 +1,6 @@
 # Volatility
 
-[Volatility](#https://www.volatilityfoundation.org/26)는 메모리 포렌식 도구이며 플러그인 형태로 다양한 기능들을 제공
+[Volatility](https://www.volatilityfoundation.org/26)는 메모리 포렌식 도구이며 플러그인 형태로 다양한 기능들을 제공
 
 # **INDEX**
 
@@ -24,9 +24,7 @@
 
 # **메모리 덤프 샘플**
 
-[Volatility 예제](#https://github.com/volatilityfoundation/volatility/wiki/Memory-Samples) 중 Malware - Cridex파일을 다운받는다.
-
-[CTF-d](#http://ctf-d.com/)의 Challenges에서 Memory 카테고리의 GrrCON 2015#1 문제 파일을 다운받는다.
+[Volatility 예제](https://github.com/volatilityfoundation/volatility/wiki/Memory-Samples) 중 Malware - Cridex파일을 다운받는다.
 
 # **운영체제 정보**
 

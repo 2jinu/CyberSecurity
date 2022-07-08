@@ -194,7 +194,7 @@ if ($UploadError === UPLOAD_ERR_INI_SIZE || $UploadError === UPLOAD_ERR_FORM_SIZ
 
 # **SplDoublyLinkedList**
 
-[SplDoublyLinkedList](#https://www.php.net/manual/en/class.spldoublylinkedlist.php) 클래스는 이중 연결 목록의 주요 기능을 제공한다.
+[SplDoublyLinkedList](https://www.php.net/manual/en/class.spldoublylinkedlist.php) 클래스는 이중 연결 목록의 주요 기능을 제공한다.
 
     취약한 버전 : PHP 8.0(alpha) 혹은 PHP 7.4.10과 이전 버전
 
@@ -362,7 +362,7 @@ nc로 세션을 대기 후 exploit.php에 접속하면 system함수를 통해 sh
 
 # **user_filter**
 
-[user_filter](#https://www.php.net/manual/en/class.php-user-filter.php)는 연결된 스트림에서 데이터를 읽거나 쓸 때마다 호출되는 사용자 정의 필터이다.
+[user_filter](https://www.php.net/manual/en/class.php-user-filter.php)는 연결된 스트림에서 데이터를 읽거나 쓸 때마다 호출되는 사용자 정의 필터이다.
 
     취약한 버전 : PHP 7.0 부터 PHP 7.4.26 이전 버전과 PHP 8.0 부터 PHP 8.0.13 이전 버전
 
@@ -603,7 +603,7 @@ nc로 세션을 대기 후 exploit.php에 접속하면 system함수를 통해 sh
 
 # **concat_function**
 
-[concatenation operator](#https://www.php.net/manual/en/language.operators.string.php)는 문자열을 합치는 연산자이다.
+[concatenation operator](https://www.php.net/manual/en/language.operators.string.php)는 문자열을 합치는 연산자이다.
 
     취약한 버전 : PHP 7.3 부터 PHP 8.1 까지 버전
 

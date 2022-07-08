@@ -1,6 +1,6 @@
 # Hash Collision
 
-[Hash](#https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%ED%95%A8%EC%88%98)는 임의의 길이의 데이터를 고정된 길이로 매핑하는 함수에 의해 얻어지는 값으로 두 Hash값이 다르다면 원래 데이터도 달라야 한다.
+[Hash](https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%ED%95%A8%EC%88%98)는 임의의 길이의 데이터를 고정된 길이로 매핑하는 함수에 의해 얻어지는 값으로 두 Hash값이 다르다면 원래 데이터도 달라야 한다.
 
 또한, Hash값을 통해 원래 데이터를 계산적으로 찾는 것은 불가능하기 때문에 무결성 검증이나 비밀번호 암호화에 사용된다.
 
@@ -133,7 +133,7 @@ if __name__ == '__main__':
 
 ![](images/2022-07-06-20-17-22.png)
 
-해당 이미지를 [MD5 File Checksum](#https://emn178.github.io/online-tools/md5_checksum.html)에서 검증해보자.
+해당 이미지를 [MD5 File Checksum](https://emn178.github.io/online-tools/md5_checksum.html)에서 검증해보자.
 
 # **SHA1**
 

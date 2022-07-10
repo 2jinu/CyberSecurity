@@ -18,7 +18,7 @@
 
 **5. [File Recovery](#File-Recovery)**
 
-# **환경 구성**
+# **환경**
 
 | Type          | Version                       |
 | :---          | :---                          |

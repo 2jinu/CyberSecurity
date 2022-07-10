@@ -10,7 +10,7 @@
 
 **3. [File Recovery](#File-Recovery)**
 
-# **환경 구성**
+# **환경**
 
 | Type          | Version                       |
 | :---          | :---                          |
@@ -314,6 +314,12 @@ Offset(V)       PID   Port  Proto Protocol        Address         Create Time
 0x822cd2b0     1220   1900     17 UDP             127.0.0.1       2012-07-22 02:43:01 UTC+0000
 0x82172c50      664   4500     17 UDP             0.0.0.0         2012-07-22 02:42:53 UTC+0000
 0x821f0d00        4    445     17 UDP             0.0.0.0         2012-07-22 02:42:31 UTC+0000
+```
+
+XP 이후에서는 netscan을 사용한다.
+
+```
+volatility_2.6_win64_standalone.exe -f cridex.vmem --profile=WinXPSP2x86 netscan
 ```
 
 # **프로세스 메모리 정보**

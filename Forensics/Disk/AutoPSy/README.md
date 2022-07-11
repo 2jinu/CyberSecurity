@@ -1,6 +1,6 @@
 # AutoPsy
 
-[Autopsy](https://www.autopsy.com/download/)는 sleuth Kit을 Windows에서 GUI 형태로 이용할 수 있는 포렌식 도구
+Autopsy는 sleuth Kit을 Windows에서 GUI 형태로 이용할 수 있는 포렌식 도구
 
 # **INDEX**
 

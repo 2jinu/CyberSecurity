@@ -1,6 +1,6 @@
 # FTK Imager
 
-[FTK Imager](https://accessdata.com/product-download/ftk-imager-version-4-5)는 AccessData에서 제작한 디지털 포렌식 도구
+FTK Imager는 AccessData에서 제작한 디지털 포렌식 도구
 
 # **INDEX**
 

@@ -1,6 +1,6 @@
 # Volatility
 
-[Volatility](https://www.volatilityfoundation.org/26)는 메모리 포렌식 도구이며 플러그인 형태로 다양한 기능들을 제공
+Volatility는 메모리 포렌식 도구이며 플러그인 형태로 다양한 기능들을 제공
 
 # **INDEX**
 

@@ -4,7 +4,7 @@
 
 [FTK Imager](https://accessdata.com/product-download/ftk-imager-version-4-5)
 
-[Volatility](https://www.volatilityfoundation.org/releases)
+[Volatility](https://www.volatilityfoundation.org/releases) 메모리 포렌식 도구
 
 [DCode](https://www.digital-detective.net/dcode/)
 

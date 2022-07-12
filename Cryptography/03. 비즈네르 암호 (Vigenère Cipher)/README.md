@@ -1,20 +1,18 @@
-# 카이사르(시저) 암호 (Caesar Cipher)
+# 비즈네르 암호 (Vigenère Cipher)
 
-기원전 44년 줄리어스 카이사르(Gaius Julius Caesar)가 사용한 암호는 평문의 각 알파벳을 일정한 거리만큼 밀어서 다른 알파벳으로 치환하는 암호
+비즈네르 암호의 장점은 [빈도분석](https://ko.wikipedia.org/wiki/%EB%B9%88%EB%8F%84%EB%B6%84%EC%84%9D_(%EC%95%94%ED%98%B8))으로 해독이 거의 불가능하다는 사실이다. 또한, 열쇠의 개수가 무궁무진하다는 것도 큰 장점인 암호이다.
 
-문자 집합(A-Z)에서 지정된 수(Shift)만큼 이동하여 나온 값이 암호화의 결과가 된다.
+비즈네르 표가 다음과 같다고 가정하자.
 
-Shift가 Z를 넘어가면 다시 A부터 남은 수만큼 이동시킨다.
+![](images/2022-07-12-12-48-29.png)
 
-![](images/2022-07-12-12-00-51.png)
+카이사르(시저) 암호와 마찬가지로 쉬프트를 이용하여 암호화 시키면 된다. 다만 쉬프트 값이 일정하지 않다는 것이다.
 
-암호화와 반대로 지정된 수(Shift)만큼 거꾸로 이동하여 나온 값이 복호화의 결과가 된다.
+이때 원문이 Hello이고, 키가 wow이면 암호문은 DSHHC가 된다.
 
-Shift가 A를 넘어가면 다시 Z부터 남은 수만큼 이동시킨다.
+![](images/2022-07-12-12-54-39.png)
 
-![](images/2022-07-12-12-00-12.png)
-
-시저 암호로 암호화된 값을 복호화해본다.
+카이사르 암호화 방식으로 이루어지기 때문에 다음과 같이 암/복호화를 해본다.
 
 ```py
 class Caesar_Cipher:
@@ -52,20 +50,19 @@ class Caesar_Cipher:
             else: result += d
         return result
 
-caesar  = Caesar_Cipher()
-for i in range(26):
-    caesar.shift = i
-    print('[{}] {}'.format(i, caesar.decrypt(data='HFJ09w H6uM8W')))
-```
+KEY         = 'Hello'
+PlainText   = 'Vigenere ciPheR'
+caesar      = Caesar_Cipher()
 
-Shift가 5일때, 사람이 읽을 수 있는 문자열이 나온다.
+EncryptText = ''
+for i, p in enumerate(PlainText):
+    caesar.shift = caesar.uppercase.find(KEY[i % len(KEY)].upper())
+    EncryptText += caesar.encrypt(data=p)
+print('Encrypt : {}'.format(EncryptText))
 
-```sh
-[0] HFJ09w H6uM8W
-[1] GEI98v G5tL7V
-[2] FDH87u F4sK6U
-[3] ECG76t E3rJ5T
-[4] DBF65s D2qI4S
-[5] CAE54r C1pH3R
-...
+DecryptText = ''
+for i, e in enumerate(EncryptText):
+    caesar.shift = caesar.uppercase.find(KEY[i % len(KEY)].upper())
+    DecryptText += caesar.decrypt(data=e)
+print('Decrypt : {}'.format(DecryptText))
 ```
